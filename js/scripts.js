@@ -59,6 +59,8 @@ function findClass(playstyle) {
 $(document).ready(function() {
   $("form#classCheck").submit(function(event) {
     event.preventDefault();
+
+
     
     let playstyle = []; 
     $("input:checkbox[name=playstyle]:checked").each(function() {
