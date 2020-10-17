@@ -6,7 +6,7 @@ function findClass(playstyle) {
   let ranger = [0, "Ranger"];
   let thief = [0, "Thief"];
   let cleric = [0, "Cleric"];
-  let magician =[0, "Magic user"];
+  let magician =[0, "Magic User"];
   
   //Read responses, each answer adds 1 point to a corresponding result.
 
@@ -60,18 +60,27 @@ $(document).ready(function() {
   $("form#classCheck").submit(function(event) {
     event.preventDefault();
 
+    let playstyle = [];
+    let complete = true;
 
-    
-    let playstyle = []; 
-    $("input:checkbox[name=playstyle]:checked").each(function() {
-      const junk = $(this).val();
-      playstyle.push(junk);
-    });
-    
-    const result = findClass(playstyle);    
+    for (let i = 1; i <= 8; i +=1) {
+      if ($("input:checkbox[name=q" + i + "]:checked").val() === undefined){
+        complete = false;
+      }
+      $("input:checkbox[name=q" + i + "]:checked").each(function() {
+        playstyle.push($(this).val());
+      });
+    }
 
-    $("#classResult").show();
-    $("#classResult").append(result);
-    $("#classCheck").hide();
+    if (complete === false){
+      alert("Please provide at least one answer to each question.");
+    } else if (complete === true) {
+      
+      const result = findClass(playstyle);
+
+      $("#classResult").show();
+      $("#classResult").append(result);
+      $("#classCheck").hide();
+    }
   });
 });
